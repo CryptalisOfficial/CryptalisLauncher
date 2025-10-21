@@ -1,20 +1,9 @@
-# Fichier de langue personnalisé pour le Cryptalis Launcher
-
 [ejs.app]
 title = "Cryptalis Launcher"
 
 [ejs.landing]
-mediaGitHubURL = "https://github.com/CryptalisProject"
-mediaXURL = "https://x.com/CryptalisOfficial"
-mediaInstagramURL = "https://instagram.com/cryptalis_official"
-mediaYouTubeURL = "https://youtube.com/@Cryptalis"
 mediaDiscordURL = "https://discord.gg/zNWUXdt"
 
 [ejs.settings]
-sourceGithubLink = "https://github.com/CryptalisProject/Launcher"
-supportLink = "https://github.com/CryptalisProject/Launcher/issues"
 
 [ejs.welcome]
-welcomeHeader = "BIENVENUE DANS LE MONDE DE CRYPTALIS"
-welcomeDescription = "Cryptalis n’est pas un simple serveur Minecraft. C’est un royaume oublié, un monde fracturé entre magie ancienne et technologie perdue. Les âmes qui osent s’y aventurer découvrent des terres corrompues, des factions en guerre et des secrets enfouis sous les ruines du temps. Seuls les plus courageux survivront… et peut-être, réécriront le destin de ce monde maudit."
-welcomeDescCTA = "L’aventure commence maintenant. Entrez dans l’univers de Cryptalis."
