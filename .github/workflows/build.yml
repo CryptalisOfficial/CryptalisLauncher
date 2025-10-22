@@ -3,8 +3,7 @@ name: Build
 on:
   push:
     branches: [ master, main ]
-    tags:
-      - 'v*.*.*'           # build & publish quand tu pousses un tag vX.Y.Z
+    tags: [ 'v*.*.*' ]     # build & publish quand tu pousses un tag vX.Y.Z
   release:
     types: [published]      # si tu crées la release depuis l’UI
   workflow_dispatch:
@@ -61,16 +60,16 @@ jobs:
         run: |
           if [ -f package-lock.json ]; then npm ci; else npm i; fi
 
-      # 1) On build toujours
+      # Build en utilisant TA config YAML (=> noms sans version)
       - name: Build app
-        run: npx electron-builder ${{ matrix.build_args }} -p never
+        run: npx electron-builder ${{ matrix.build_args }} -p never --config electron-builder.yml
 
-      # 2) On attache les fichiers à la Release (sur TAG ou RELEASE)
+      # Attache les fichiers buildés à la Release (sur TAG ou RELEASE)
       - name: Upload to GitHub Release
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}     # tag actuel ; crée la release s’il n’y en a pas
+          tag_name: ${{ github.ref_name }}
           files: |
             dist/*.exe
             dist/*.msi
@@ -82,7 +81,7 @@ jobs:
           fail_on_unmatched_files: false
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # (facultatif) artefacts dans l’onglet Actions
+      # Artefacts dans l’onglet Actions (facultatif)
       - name: Upload dist artifacts (Actions)
         uses: actions/upload-artifact@v4
         with:
