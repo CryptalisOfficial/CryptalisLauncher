@@ -34,7 +34,9 @@
       { "provider": "github", "owner": "CryptalisOfficial", "repo": "CryptalisLauncher" }
     ],
     "win": { "target": "nsis", "icon": "build/icon.ico" },
-    "linux": { "target": ["AppImage"], "icon": "build/icons" }
+    "linux": { "target": ["AppImage"], "icon": "build/icons" },
+    "mac": { "target": ["dmg"], "icon": "build/icons" }
+
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",

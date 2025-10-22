@@ -4,7 +4,10 @@ on:
   push:
     branches: [ master, main ]
     tags:
-       - 'v*.*.*'
+      - 'v*.*.*'          # build & publish automatique quand tu pousses un tag vX.Y.Z
+  release:
+    types: [published]     # si tu crées la release depuis l'UI avec "Create new tag on publish"
+  workflow_dispatch:        # déclenchement manuel (bouton "Run workflow")
 
 permissions:
   contents: write
@@ -18,9 +21,8 @@ jobs:
     name: Build ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
-      # Token auto des Actions, mappé vers ce qu'attend electron-builder
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # token Actions
+      GH_TOKEN:     ${{ secrets.GITHUB_TOKEN }}   # ce qu'attend electron-builder
 
     strategy:
       fail-fast: false
@@ -48,22 +50,27 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install deps (ci or i)
+      # Dépendances Linux utiles pour AppImage/RPM (ignoré sur Windows/macOS)
+      - name: Install Linux build deps
+        if: runner.os == 'Linux'
         run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm i
-          fi
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools rpm fakeroot
 
-      # Build sur branche (artefacts uniquement)
+      # Utilise Bash sur tous les OS (sinon Windows exécute en PowerShell)
+      - name: Install deps (ci or i)
+        shell: bash
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm i; fi
+
+      # Build sur branche => artefacts seulement
       - name: Build (no publish on branch)
         if: startsWith(github.ref, 'refs/heads/')
         run: npx electron-builder ${{ matrix.build_args }} -p never
 
-      # Build + publication sur tag vX.Y.Z
-      - name: Build & Publish (on tag)
-        if: startsWith(github.ref, 'refs/tags/')
+      # Build + publication si TAG ou si RELEASE publiée
+      - name: Build & Publish (on tag or release)
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
         run: npx electron-builder ${{ matrix.build_args }} -p always
 
       - name: Upload dist artifacts
