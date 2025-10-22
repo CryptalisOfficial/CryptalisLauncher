@@ -1,9 +1,20 @@
+# Fichier de langue personnalisé pour le Launcher Cryptalis
+
 [ejs.app]
 title = "Cryptalis Launcher"
 
 [ejs.landing]
-mediaDiscordURL = "https://discord.gg/zNWUXdt"
+mediaGitHubURL = "https://github.com/CryptalisOfficial/CryptalisLauncher"
+mediaXURL = "#"
+mediaInstagramURL = "#"
+mediaYouTubeURL = "#"
+mediaDiscordURL = "https://discord.gg/vj5fSjeCfx"
 
 [ejs.settings]
+sourceGithubLink = "https://github.com/CryptalisOfficial/CryptalisLauncher"
+supportLink = "https://github.com/CryptalisOfficial/CryptalisLauncher/issues"
 
 [ejs.welcome]
+welcomeHeader = "Bienvenue sur Cryptalis"
+welcomeDescription = "Entrez dans le monde de **Cryptalis**, un univers où la technologie et la magie s’affrontent pour le contrôle du réel. Rejoignez des factions, explorez des royaumes maudits et découvrez les secrets enfouis d’un monde fracturé entre ombre et lumière. Chaque choix, chaque combat et chaque alliance façonneront votre destinée dans ce royaume en perpétuelle évolution."
+welcomeDescCTA = "Votre aventure commence maintenant. Préparez-vous à plonger dans l’univers de Cryptalis."

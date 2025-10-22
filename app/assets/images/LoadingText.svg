@@ -1,0 +1,47 @@
+<!-- Loading text SVG (512x512, scalable) -->
+<svg viewBox="0 0 512 512" width="280" height="280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cryptalis Launcher">
+    <defs>
+        <!-- Cercle pour le texte -->
+        <path id="circlePath" d="M256,256 m-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0" />
+        <!-- Styles -->
+        <style>
+            .ring      { fill:none; stroke:#ffffff; }
+            .ring.outer{ stroke-width:16; opacity:.22; }
+            .ring.inner{ stroke-width:6;  opacity:.85; }
+            .textCircle{
+            fill:#ffffff;
+            font-family: "Ringbearer","Avenir Medium", system-ui, sans-serif;
+            font-weight: 700;
+            font-size: 28px;                 /* ajuste la taille du texte ici */
+            letter-spacing: 2px;             /* espace entre lettres */
+            }
+            /* Animation du groupe complet (le texte tourne parfaitement rond) */
+            #spinner { transform-origin: 256px 256px; animation: spin 10s linear infinite; }
+            @keyframes spin { to { transform: rotate(360deg); } }
+        </style>
+    </defs>
+
+    <!-- Fond (facultatif) -->
+    <!-- <circle cx="256" cy="256" r="256" fill="#121212"/> -->
+
+    <!-- Groupe animé -->
+    <g id="spinner">
+        <!-- Anneaux -->
+        <circle class="ring outer" cx="256" cy="256" r="200" />
+        <circle class="ring inner" cx="256" cy="256" r="170" />
+
+        <!-- Texte sur le cercle (répété pour fermer proprement la boucle) -->
+        <!-- Astuce: ajoute un point médian • (Alt+0149) entre les mots pour des séparateurs réguliers -->
+        <text class="textCircle">
+            <textPath href="#circlePath" startOffset="0%">
+                • CRYPTALIS LAUNCHER • CRYPTALIS LAUNCHER • CRYPTALIS LAUNCHER
+            </textPath>
+        </text>
+    </g>
+
+    <!-- Logo central (si tu veux une image PNG/SVG au milieu) -->
+    <!-- Remplace xlink:href par le chemin de ton cristal -->
+    <!--
+    <image x="176" y="176" width="160" height="160" href="./LoadingSeal.png" />
+    -->
+</svg>
